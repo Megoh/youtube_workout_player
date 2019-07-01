@@ -1,0 +1,60 @@
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.playButton,
+.pauseButton,
+.stopButton {
+  height: 3rem;
+  width: 10rem;
+  justify-self: center;
+}
+
+.startTimerButton {
+  height: 3rem;
+  width: 10rem;
+  justify-content: center;
+}
+
+.controls {
+  grid-column: 1;
+  grid-row: 5;
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.playlistId {
+  grid-row: 1;
+}
+
+.player {
+  grid-row: 2;
+}
+
+.workoutTime {
+  grid-row: 3;
+}
+
+.breakTime {
+  grid-row: 4;
+}
+
+.wrapper {
+  display: grid;
+  gap: 1rem;
+  height: 50rem;
+  width: 50rem;
+  font-size: 2rem;
+  // > * {
+  //   display: flex;
+  //   justify-content: center;
+  // }
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Video player for workout</title>
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="playlistId">
+        <label for="playlistIdInput">Enter a youtube playlist ID:</label>
+        <input id="playlistIdInput" type="text" />
+      </div>
+      <div class="player" id="player"></div>
+      <div class="workoutTime">
+        <label for="workoutTimeInput">Enter the amount of workout time:</label>
+        <input type="number" id="workoutTimeInput" min="1" />
+      </div>
+      <div class="breakTime">
+        <label for="breakTimeInput">Enter the amount of break time:</label>
+        <input type="number" id="breakTimeInput" min="1" />
+      </div>
+      <div class="controls">
+        <button class="playButton" id="playButton">Play</button>
+        <button class="pauseButton" id="pauseButton">Pause</button>
+        <button class="stopButton" id="stopButton">Stop</button>
+      </div>
+      <h1 class="display__time-left">display time left here</h1>
+      <button class="startTimerButton" id="startTimerButton">Start timer</button>
+    </div>
+    <script src="scripts/script.js"></script>
+  </body>
+</html>

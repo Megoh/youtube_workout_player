@@ -7,26 +7,6 @@ const startTimerButton = document.querySelector("#startTimerButton");
 const workoutTimeInput = document.querySelector("#workoutTimeInput");
 const timerDisplay = document.querySelector(".display__time-left");
 
-// let player;
-// function onYouTubeIframeAPIReady() {
-//   player = new YT.Player("player", {
-//     height: "315",
-//     width: "560",
-//     videoId: "M7lc1UVf-VE",
-//   });
-// }
-
-// function setPlaylist(e) {
-//   youtubeFrame.setAttribute(
-//     "src",
-//     `https://www.youtube.com/embed/videoseries?list=${this.value}`
-//   );
-// }
-
-// function stopVideo() {
-//   player.stopVideo();
-// }
-
 // 2. This code loads the IFrame Player API code asynchronously.
 let tag = document.createElement("script");
 tag.src = "https://www.youtube.com/iframe_api";

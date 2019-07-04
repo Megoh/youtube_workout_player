@@ -11,6 +11,16 @@ const startTimerButton = document.querySelector(".timer-buttons__start-button");
 
 const timerDisplay = document.querySelector(".display__time-left");
 
+// workout states
+const WORKOUT = "workout";
+const BREAK = "break";
+const INACTIVE = "unstarted";
+let workoutState = INACTIVE;
+
+// workout times
+let workoutTime;
+let breakTime;
+
 let tag = document.createElement("script");
 tag.src = "https://www.youtube.com/iframe_api";
 let firstScriptTag = document.getElementsByTagName("script")[0];
@@ -26,7 +36,6 @@ function onYouTubeIframeAPIReady() {
       list: "PLdKtPlG1-apjzv_SnWTcO__qtuwrgh3fE"
     },
     events: {
-      onStateChange: onPlayerStateChange,
       onError: onPlayerError
     }
   });
@@ -68,7 +77,22 @@ function timer(seconds) {
   countdown = setInterval(() => {
     const secondsLeft = Math.round((then - Date.now()) / 1000);
     if (secondsLeft < 0) {
-      pauseVideo();
+      // if workout time is over then start a break time and pause the video
+      if (workoutState === WORKOUT) {
+        workoutState = BREAK;
+        secondsSet = breakTime;
+        timer(secondsSet);
+        pauseVideo();
+        return;
+      }
+      // if break time is over then start a workout time and pause the video
+      else if (workoutState === BREAK) {
+        workoutState = WORKOUT;
+        secondsSet = workoutTime;
+        timer(secondsSet);
+        playVideo();
+        return;
+      }
       clearInterval(countdown);
       return;
     }
@@ -78,6 +102,14 @@ function timer(seconds) {
 
 function startTimer() {
   playVideo();
+  if (workoutState === WORKOUT) {
+    secondsSet = workoutTime;
+  } else if (workoutState === BREAK) {
+    secondsSet = breakTime;
+  } else if (workoutState === INACTIVE) {
+    workoutState = WORKOUT;
+    secondsSet = workoutTime;
+  }
   if (secondsSet) {
     timer(secondsSet);
   } else {
@@ -93,10 +125,6 @@ function displayTimeLeft(seconds) {
   }${remainderSeconds}`;
   document.title = display;
   timerDisplay.textContent = display;
-}
-
-function onPlayerStateChange(e) {
-  console.log(e);
 }
 
 function onPlayerError(e) {
@@ -121,10 +149,10 @@ function onPlayerError(e) {
 // inputs
 playlistIdInput.addEventListener("input", setPlaylist);
 breakTimeInput.addEventListener("input", () => {
-  secondsSet = workoutTimeInput.value;
+  breakTime = breakTimeInput.value;
 });
 workoutTimeInput.addEventListener("input", () => {
-  secondsSet = workoutTimeInput.value;
+  workoutTime = workoutTimeInput.value;
 });
 
 // buttons

@@ -2,6 +2,7 @@ html {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-size: 62.5%;
+  font-family: sans-serif;
 }
 
 body {
@@ -17,21 +18,20 @@ body {
   height: 100vh;
 }
 
-.playButton,
-.pauseButton,
-.stopButton {
+.control-buttons > button {
   height: 3rem;
   width: 10rem;
   -ms-grid-column-align: center;
       justify-self: center;
 }
 
-.startTimerButton {
+.timer-buttons__start-button {
   height: 3rem;
-  width: 10rem;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  margin-top: 1rem;
+  width: 10rem;
 }
 
 .controls {
@@ -44,7 +44,7 @@ body {
   grid-auto-flow: column;
 }
 
-.playlistId {
+.playlist-id {
   -ms-grid-row: 1;
   grid-row: 1;
 }
@@ -54,12 +54,12 @@ body {
   grid-row: 2;
 }
 
-.workoutTime {
+.workout-time {
   -ms-grid-row: 3;
   grid-row: 3;
 }
 
-.breakTime {
+.break-time {
   -ms-grid-row: 4;
   grid-row: 4;
 }

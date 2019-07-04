@@ -1,13 +1,16 @@
-const playlistIdInput = document.querySelector("#playlistIdInput");
-const youtubeFrame = document.querySelector("#youtubeFrame");
-const playButton = document.querySelector("#playButton");
-const pauseButton = document.querySelector("#pauseButton");
-const stopButton = document.querySelector("#stopButton");
-const startTimerButton = document.querySelector("#startTimerButton");
-const workoutTimeInput = document.querySelector("#workoutTimeInput");
+// inputs
+const playlistIdInput = document.querySelector("#playlist-id__input");
+const workoutTimeInput = document.querySelector("#workout-time__input");
+const breakTimeInput = document.querySelector("#break-time__input");
+
+// buttons
+const playButton = document.querySelector(".control-buttons__play-button");
+const pauseButton = document.querySelector(".control-buttons__pause-button");
+const stopButton = document.querySelector(".control-buttons__stop-button");
+const startTimerButton = document.querySelector(".timer-buttons__start-button");
+
 const timerDisplay = document.querySelector(".display__time-left");
 
-// 2. This code loads the IFrame Player API code asynchronously.
 let tag = document.createElement("script");
 tag.src = "https://www.youtube.com/iframe_api";
 let firstScriptTag = document.getElementsByTagName("script")[0];
@@ -21,6 +24,10 @@ function onYouTubeIframeAPIReady() {
     playerVars: {
       listType: "playlist",
       list: "PLdKtPlG1-apjzv_SnWTcO__qtuwrgh3fE"
+    },
+    events: {
+      onStateChange: onPlayerStateChange,
+      onError: onPlayerError
     }
   });
 }
@@ -46,7 +53,7 @@ function setPlaylist() {
 }
 
 let countdown;
-let minutesLeft = workoutTimeInput.value;
+let secondsSet;
 
 function timer(seconds) {
   // clear any existing timers
@@ -57,6 +64,7 @@ function timer(seconds) {
 
   displayTimeLeft(seconds);
 
+  // start the timer
   countdown = setInterval(() => {
     const secondsLeft = Math.round((then - Date.now()) / 1000);
     if (secondsLeft < 0) {
@@ -69,9 +77,12 @@ function timer(seconds) {
 }
 
 function startTimer() {
-  const seconds = minutesLeft * 60;
   playVideo();
-  timer(seconds);
+  if (secondsSet) {
+    timer(secondsSet);
+  } else {
+    timerDisplay.innerHTML = `<span style="color:red;">You must enter a valid number!</span>`;
+  }
 }
 
 function displayTimeLeft(seconds) {
@@ -84,11 +95,40 @@ function displayTimeLeft(seconds) {
   timerDisplay.textContent = display;
 }
 
+function onPlayerStateChange(e) {
+  console.log(e);
+}
+
+function onPlayerError(e) {
+  switch (e.data) {
+    // the video requested was not found
+    case 100:
+      player.nextVideo();
+      break;
+
+    // the owner of the requested video does not allow it to be played in embedded players
+    case 101:
+      player.nextVideo();
+      break;
+
+    // this error is the same as 101. It's just a 101 error in disguise!
+    case 150:
+      player.nextVideo();
+      break;
+  }
+}
+
+// inputs
 playlistIdInput.addEventListener("input", setPlaylist);
+breakTimeInput.addEventListener("input", () => {
+  secondsSet = workoutTimeInput.value;
+});
+workoutTimeInput.addEventListener("input", () => {
+  secondsSet = workoutTimeInput.value;
+});
+
+// buttons
 playButton.addEventListener("click", playVideo);
 pauseButton.addEventListener("click", pauseVideo);
 stopButton.addEventListener("click", stopVideo);
 startTimerButton.addEventListener("click", startTimer);
-workoutTimeInput.addEventListener("input", () => {
-  minutesLeft = workoutTimeInput.value;
-});

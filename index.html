@@ -9,26 +9,34 @@
   </head>
   <body>
     <div class="wrapper">
-      <div class="playlistId">
-        <label for="playlistIdInput">Enter a youtube playlist ID:</label>
-        <input id="playlistIdInput" type="text" />
+      <div class="playlist-id">
+        <label for="playlist-id__input">Enter a youtube playlist ID:</label>
+        <input id="playlist-id__input" type="text" />
       </div>
       <div class="player" id="player"></div>
-      <div class="workoutTime">
-        <label for="workoutTimeInput">Enter the amount of workout time:</label>
-        <input type="number" id="workoutTimeInput" min="1" />
+      <div class="workout-time">
+        <label for="workout-time__input"
+          >Enter the amount of workout time in seconds:</label
+        >
+        <input type="number" id="workout-time__input" min="1" />
       </div>
-      <div class="breakTime">
-        <label for="breakTimeInput">Enter the amount of break time:</label>
-        <input type="number" id="breakTimeInput" min="1" />
+      <div class="break-time">
+        <label for="break-time__input"
+          >Enter the amount of break time in seconds:</label
+        >
+        <input type="number" id="break-time__input" min="1" />
       </div>
-      <div class="controls">
-        <button class="playButton" id="playButton">Play</button>
-        <button class="pauseButton" id="pauseButton">Pause</button>
-        <button class="stopButton" id="stopButton">Stop</button>
+      <div class="control-buttons">
+        <button class="control-buttons__play-button">Play</button>
+        <button class="control-buttons__pause-button">Pause</button>
+        <button class="control-buttons__stop-button">Stop</button>
+        <div class="timer-buttons">
+          <button class="timer-buttons__start-button">
+            Start timer
+          </button>
+        </div>
       </div>
-      <h1 class="display__time-left">Display time left here</h1>
-      <button class="startTimerButton" id="startTimerButton">Start timer</button>
+      <h1 class="display__time-left">(displays time left here)</h1>
     </div>
     <script src="scripts/script.js"></script>
   </body>

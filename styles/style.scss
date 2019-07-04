@@ -1,6 +1,7 @@
 html {
   box-sizing: border-box;
   font-size: 62.5%;
+  font-family: sans-serif;
 }
 
 body {
@@ -10,18 +11,19 @@ body {
   height: 100vh;
 }
 
-.playButton,
-.pauseButton,
-.stopButton {
-  height: 3rem;
-  width: 10rem;
-  justify-self: center;
+.control-buttons {
+  > button {
+    height: 3rem;
+    width: 10rem;
+    justify-self: center;
+  }
 }
 
-.startTimerButton {
+.timer-buttons__start-button {
   height: 3rem;
-  width: 10rem;
   justify-content: center;
+  margin-top: 1rem;
+  width: 10rem;
 }
 
 .controls {
@@ -31,7 +33,7 @@ body {
   grid-auto-flow: column;
 }
 
-.playlistId {
+.playlist-id {
   grid-row: 1;
 }
 
@@ -39,11 +41,11 @@ body {
   grid-row: 2;
 }
 
-.workoutTime {
+.workout-time {
   grid-row: 3;
 }
 
-.breakTime {
+.break-time {
   grid-row: 4;
 }
 

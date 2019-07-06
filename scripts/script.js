@@ -59,7 +59,11 @@ function stopVideo() {
 }
 
 function setPlaylist() {
-  // change playlist based on the input
+  // prepare the playlist to be played
+  player.cuePlaylist({
+    listType: "playlist",
+    list: this.value
+  });
 }
 
 let countdown;
@@ -111,7 +115,7 @@ function startTimer() {
     secondsSet = workoutTime;
   }
   // start the timer if the input time exists
-  if (secondsSet) {
+  if (secondsSet && breakTime) {
     timer(secondsSet);
     playVideo();
   } else {

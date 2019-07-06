@@ -25,7 +25,8 @@ body {
       justify-self: center;
 }
 
-.timer-buttons__start-button {
+.timer-buttons__start-button,
+.timer-buttons__stop-button {
   height: 3rem;
   -webkit-box-pack: center;
       -ms-flex-pack: center;

@@ -19,7 +19,8 @@ body {
   }
 }
 
-.timer-buttons__start-button {
+.timer-buttons__start-button,
+.timer-buttons__stop-button {
   height: 3rem;
   justify-content: center;
   margin-top: 1rem;

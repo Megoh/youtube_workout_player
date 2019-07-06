@@ -8,6 +8,7 @@ const playButton = document.querySelector(".control-buttons__play-button");
 const pauseButton = document.querySelector(".control-buttons__pause-button");
 const stopButton = document.querySelector(".control-buttons__stop-button");
 const startTimerButton = document.querySelector(".timer-buttons__start-button");
+const stopTimerButton = document.querySelector(".timer-buttons__stop-button");
 
 const timerDisplay = document.querySelector(".display__time-left");
 
@@ -101,7 +102,6 @@ function timer(seconds) {
 }
 
 function startTimer() {
-  playVideo();
   if (workoutState === WORKOUT) {
     secondsSet = workoutTime;
   } else if (workoutState === BREAK) {
@@ -110,11 +110,18 @@ function startTimer() {
     workoutState = WORKOUT;
     secondsSet = workoutTime;
   }
+  // start the timer if the input time exists
   if (secondsSet) {
     timer(secondsSet);
+    playVideo();
   } else {
     timerDisplay.innerHTML = `<span style="color:red;">You must enter a valid number!</span>`;
   }
+}
+
+function stopTimer() {
+  stopVideo();
+  clearInterval(countdown);
 }
 
 function displayTimeLeft(seconds) {
@@ -160,3 +167,4 @@ playButton.addEventListener("click", playVideo);
 pauseButton.addEventListener("click", pauseVideo);
 stopButton.addEventListener("click", stopVideo);
 startTimerButton.addEventListener("click", startTimer);
+stopTimerButton.addEventListener("click", stopTimer);

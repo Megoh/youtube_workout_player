@@ -35,13 +35,14 @@ function onYouTubeIframeAPIReady() {
     height: "390",
     width: "640",
     events: {
-      onError: onPlayerError
+      onError: onPlayerError,
+      onReady: onPlayerReady
     }
   });
 }
 
-function onPlayerReady(e) {
-  e.target.playVideo();
+function onPlayerReady() {
+  cuePlaylist(playlistId);
 }
 
 function playVideo() {
@@ -58,12 +59,19 @@ function stopVideo() {
 
 function setPlaylist() {
   // prepare the playlist to be played
+  cuePlaylist(playlistId);
+  playlistId = this.value;
   player.cuePlaylist({
     listType: "playlist",
     list: this.value
   });
+}
 
-  playlistId = this.value;
+function cuePlaylist(playlist) {
+  player.cuePlaylist({
+    listType: "playlist",
+    list: playlist
+  });
 }
 
 let countdown;

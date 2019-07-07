@@ -22,6 +22,8 @@ let workoutState = INACTIVE;
 let workoutTime;
 let breakTime;
 
+let playlistId;
+
 let tag = document.createElement("script");
 tag.src = "https://www.youtube.com/iframe_api";
 let firstScriptTag = document.getElementsByTagName("script")[0];
@@ -60,6 +62,8 @@ function setPlaylist() {
     listType: "playlist",
     list: this.value
   });
+
+  playlistId = this.value;
 }
 
 let countdown;
@@ -101,6 +105,22 @@ function timer(seconds) {
   }, 1000);
 }
 
+function saveTimer() {
+  localStorage.setItem("workoutTime", workoutTime.toString());
+  localStorage.setItem("breakTime", breakTime.toString());
+  localStorage.setItem("playlistId", playlistId);
+}
+
+function loadTimer() {
+  workoutTime = parseInt(localStorage.getItem("workoutTime"));
+  breakTime = parseInt(localStorage.getItem("breakTime"));
+  playlistId = localStorage.getItem("playlistId");
+
+  breakTimeInput.value = breakTime;
+  workoutTimeInput.value = workoutTime;
+  playlistIdInput.value = playlistId;
+}
+
 function startTimer() {
   if (workoutState === WORKOUT) {
     secondsSet = workoutTime;
@@ -113,6 +133,12 @@ function startTimer() {
   // start the timer if the input time exists
   if (secondsSet && breakTime) {
     timer(secondsSet);
+    // save data to local storage here
+    saveTimer();
+    player.loadPlaylist({
+      listType: "playlist",
+      list: playlistId
+    });
     playVideo();
   } else {
     timerDisplay.innerHTML = `<span style="color:red;">You must enter a valid number!</span>`;
@@ -152,6 +178,8 @@ function onPlayerError(e) {
       break;
   }
 }
+
+loadTimer();
 
 // inputs
 playlistIdInput.addEventListener("input", setPlaylist);

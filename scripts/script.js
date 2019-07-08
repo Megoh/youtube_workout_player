@@ -22,6 +22,8 @@ let workoutState = INACTIVE;
 let workoutTime;
 let breakTime;
 
+// playlist info
+let playlistLink;
 let playlistId;
 
 let tag = document.createElement("script");
@@ -58,8 +60,15 @@ function stopVideo() {
 }
 
 function setPlaylist() {
+  const playlistInput = this.value;
+  if (playlistInput.includes("youtube")) {
+    playlistLink = playlistInput;
+    playlistId = youtubePlaylistParser(playlistLink);
+  } else {
+    playlistId = playlistInput;
+  }
+
   // prepare the playlist to be played
-  playlistId = this.value;
   cuePlaylist(playlistId);
 }
 
@@ -68,6 +77,17 @@ function cuePlaylist(playlist) {
     listType: "playlist",
     list: playlist
   });
+}
+
+function youtubePlaylistParser(link) {
+  let reg = new RegExp("[&?]list=([a-z0-9_-]+)", "i");
+  let match = reg.exec(link);
+
+  if (match && match[1].length > 0) {
+    return match[1];
+  } else {
+    return "failed to parse youtube playlist";
+  }
 }
 
 let countdown;

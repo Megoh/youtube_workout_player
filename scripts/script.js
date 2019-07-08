@@ -59,12 +59,8 @@ function stopVideo() {
 
 function setPlaylist() {
   // prepare the playlist to be played
-  cuePlaylist(playlistId);
   playlistId = this.value;
-  player.cuePlaylist({
-    listType: "playlist",
-    list: this.value
-  });
+  cuePlaylist(playlistId);
 }
 
 function cuePlaylist(playlist) {
